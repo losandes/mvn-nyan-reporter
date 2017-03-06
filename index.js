@@ -82,11 +82,6 @@ function makeCommandFactory (dir) {
                 var heading = dir.split('/');
                 printers.printHeading(heading[heading.length - 1]);
 
-                if (argHandlers.getOptions.font === 'none') {
-                    // the lack of font could use a buffer
-                    printers.write('\n');
-                }
-
                 return require('child_process')
                     .spawn('mvn', argHandlers.getMvnArgs(), { cwd: dir });
             }
