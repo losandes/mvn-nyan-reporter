@@ -44,7 +44,11 @@ function Reporter (
                 stats.finalizeStats(makeCurrentStats(str));
                 draw();
             } else if (str.indexOf('Total time') > -1) {
-                timeElapsed = str.split(':')[1].trim();
+                timeElapsed = str.split(':');
+                timeElapsed.shift();        // remove the first part ([INFO] Total time:)
+                timeElapsed = timeElapsed
+                    .join(':')              // rejoin the rest of it (01:26 min)
+                    .trim();                // get rid of trailing whitespace
             }
         } else {
             if (has(str, options.statsMatchers || ['Tests run:'])) {
