@@ -82,7 +82,7 @@ function Printers (clc, rainbowifier, writerFactory, fonts, options) {
 
         if (options.parallel) {
             write(clc.right(inc));
-            write('<<< ' + heading);            
+            write('<<< ' + heading);
         }
 
         write('\n');
@@ -144,7 +144,7 @@ function Printers (clc, rainbowifier, writerFactory, fonts, options) {
             heading.push(word[i]);
         }
 
-        heading = heading.concat([' ','#','#','#','#','#','#','#','#']);
+        heading = heading.concat([' ','#','#','#','#','#','#','#','#','\n']);
         return heading;
     }
 
