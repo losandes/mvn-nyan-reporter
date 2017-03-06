@@ -70,8 +70,6 @@ function start (folders) {
         if (err) {
             printers.write(clc.red('######## ABORTED #########'));
         }
-
-        printers.write(clc.green('COMPLETE'));
     });
 }
 
