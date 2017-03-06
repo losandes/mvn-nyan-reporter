@@ -54,7 +54,7 @@ function Printers (clc, rainbowifier, writerFactory, fonts, options) {
     /*
     // Print the final outcomes
     */
-    function printStats (stats, timeElapsed) {
+    function printStats (stats, timeElapsed, heading) {
         'use strict';
         var inc = 3;
 
@@ -79,6 +79,9 @@ function Printers (clc, rainbowifier, writerFactory, fonts, options) {
             write(clc.right(inc));
             write(clc.cyan('(' + timeElapsed + ')'));
         }
+
+        write(clc.right(inc));
+        write('<<< ' + heading);
 
         write('\n');
         write('\n');

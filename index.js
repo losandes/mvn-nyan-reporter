@@ -44,6 +44,7 @@ function start (folders) {
         return function (callback) {
             // Create and run the Reporter
             new Reporter(
+                makeHeading(dir),
                 makeCommandFactory(dir),
                 new Stats(),
                 new DebugLogs(),
@@ -66,20 +67,25 @@ function start (folders) {
         tasks.push(makeTask());
     }
 
-    async.series(tasks, function (err) {
-        if (err) {
-            printers.write(clc.red('######## ABORTED #########'));
-        }
-    });
+    if (argHandlers.getOptions().parallel) {
+        async.parallel(tasks, function (err) {
+            if (err) {
+                printers.write(clc.red('######## ABORTED #########'));
+            }
+        });
+    } else {
+        async.series(tasks, function (err) {
+            if (err) {
+                printers.write(clc.red('######## ABORTED #########'));
+            }
+        });
+    }
 }
 
 function makeCommandFactory (dir) {
     if (dir) {
         return {
             run: function () {
-                var heading = dir.split('/');
-                printers.printHeading(heading[heading.length - 1]);
-
                 return require('child_process')
                     .spawn('mvn', argHandlers.getMvnArgs(), { cwd: dir });
             }
@@ -92,6 +98,17 @@ function makeCommandFactory (dir) {
             }
         };
     }
+}
+
+function makeHeading (dir) {
+    var heading;
+
+    if (!dir) {
+        return null;
+    }
+
+    heading = dir.split('/');
+    return heading[heading.length - 1];
 }
 
 function makeWriterFactory () {

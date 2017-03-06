@@ -37,6 +37,13 @@ mvn-nyan -f ./common
 mvn-nyan -f ./common,./my-project
 ```
 
+##### Running Directories in Parallel
+If you want to run multiple directories at once, use the `-parallel` switch.
+
+```
+mvn-nyan -f ./common,./my-project -scaredyCat true -parallel true
+```
+
 #### Running a single test
 In addition to the built in `mvn` args, there's a short hand for this, using the `-tests` or `-t` switches:
 

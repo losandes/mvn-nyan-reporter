@@ -1,6 +1,7 @@
 module.exports = Reporter;
 
 function Reporter (
+    heading,
     commandFactory,
     stats,
     debugLogs,
@@ -81,7 +82,7 @@ function Reporter (
         drawUtil.fillWithNewlines();
         printers.printTestFailures(failures);
         printers.printDebugLogs(debugLogs.getLogs());
-        printers.printStats(stats, timeElapsed);
+        printers.printStats(stats, timeElapsed, heading);
 
         if (options.folders.length) {
             // add a bottom-buffer
@@ -96,6 +97,10 @@ function Reporter (
         firstPass = false;
         shell.cursor.hide();
         printers.write('\n');
+
+        if (options.showDirectoryHeading && options.folders.length && heading) {
+            printers.printHeading(heading);
+        }
 
         if (options.scaredyCat) {
             write('Running tests...');

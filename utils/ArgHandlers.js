@@ -9,6 +9,7 @@ function ArgHandlers () {
             logMatchers: [],                // ['DEBUG', 'INFO', 'WARN', 'ERROR', 'something_im_looking_for'],
             folders: [],
             font: 'subzero',
+            showDirectoryHeading: true,
             statsHeading: false,
             failuresHeading: false,
             logsHeading: true,
@@ -17,6 +18,7 @@ function ArgHandlers () {
             compilationErrorMatchers: null, // ['COMPILATION ERROR'] TODO: support overrides
             showLogs: false,
             scaredyCat: false,
+            parallel: false,
             writer: null                    // TODO: add switches to support other writers, like file writers
         },
         self = {
@@ -117,6 +119,18 @@ function ArgHandlers () {
         }
     });
 
+    // Run the tests in each directory, in parallel
+    self.handlers.push({
+        matches: function (i) {
+            return argvMatches(i, '-parallel') &&
+                argvMatches(i + 1, 'true');
+        },
+        execute: function (i) {
+            options.parallel = true;
+            options.showDirectoryHeading = false;
+        }
+    });
+
     // Choose the heading font
     // -font subzero
     // -font none
@@ -171,7 +185,23 @@ function ArgHandlers () {
     // -logsHeading Output
     self.handlers.push({
         matches: function (i) {
-            return argvMatches(i, '-logsHeading') &&
+            return argvMatches(i, '-logsHeading');
+        },
+        execute: function (i) {
+            if (argvMatches(i + 1, 'false')) {
+                options.logsHeading = false;
+            } else {
+                options.logsHeading = process.argv[i + 1];
+            }
+
+        }
+    });
+
+    // Set the logs heading (default: Logs)
+    // -dirHeading false
+    self.handlers.push({
+        matches: function (i) {
+            return argvMatches(i, '-dirHeading') &&
                 argvMatches(i + 1, 'false');
         },
         execute: function (i) {
