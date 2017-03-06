@@ -1,6 +1,8 @@
 # mvn-nyan-reporter
 Nyan Cat style test reporter for the MVN Surefire plugin, based on mocha and karma reporters.
 
+![mvn-nyan-success](https://cloud.githubusercontent.com/assets/933621/23616663/86abbaca-0258-11e7-94a2-546c929c05f5.gif)
+
 > This reporter is a port of the Node.js reporter,  [karma-nyan-reporter](https://github.com/dgarlitt/karma-nyan-reporter).
 
 #### Disclaimer
