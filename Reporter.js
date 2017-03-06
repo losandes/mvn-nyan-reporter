@@ -79,7 +79,11 @@ function Reporter (
 
     command.on('close', function(code) {
         draw();
-        drawUtil.fillWithNewlines();
+
+        if (!options.scaredycat) {    
+            drawUtil.fillWithNewlines();
+        }
+
         printers.printTestFailures(failures);
         printers.printDebugLogs(debugLogs.getLogs());
         printers.printStats(stats, timeElapsed, heading);
@@ -102,21 +106,21 @@ function Reporter (
             printers.printHeading(heading);
         }
 
-        if (options.scaredyCat) {
+        if (options.scaredyCat && heading) {
+            write('Running ' + heading);
+        } else if (options.scaredyCat) {
             write('Running tests...');
         }
     }
 
     function draw () {
-        drawUtil.appendRainbow(rainbowifier);
-
         if (!options.scaredyCat) {
+            drawUtil.appendRainbow(rainbowifier);
             drawUtil.drawScoreboard(stats);
             drawUtil.drawRainbow();
             drawUtil.drawNyanCat(stats);
+            drawUtil.tick = !drawUtil.tick;
         }
-
-        drawUtil.tick = !drawUtil.tick;
     }
 
     function makeCurrentStats (input) {
