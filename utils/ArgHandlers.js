@@ -71,6 +71,7 @@ function ArgHandlers () {
         execute: function (i) {
             if (argvMatches(i + 1, 'true')) {
                 options.logMatchers.push('*ALL*');
+                options.showLogs = true;
             } else {
                 options.logMatchers = options.logMatchers.concat(
                     process.argv[i + 1]
@@ -79,6 +80,8 @@ function ArgHandlers () {
                             return item.trim();
                         })
                 );
+
+                options.showLogs = true;
             }
 
         }
@@ -164,8 +167,8 @@ function ArgHandlers () {
     });
 
     // Set the logs heading (default: Logs)
-    // -failuresHeading false
-    // -failuresHeading Console
+    // -logsHeading false
+    // -logsHeading Output
     self.handlers.push({
         matches: function (i) {
             return argvMatches(i, '-logsHeading') &&
