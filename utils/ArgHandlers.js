@@ -111,8 +111,9 @@ function ArgHandlers () {
     // -scaredyCat true
     self.handlers.push({
         matches: function (i) {
-            return argvMatches(i, '-scaredycat') &&
-                argvMatches(i + 1, 'true');
+            return (argvMatches(i, '-scaredycat') &&
+                    argvMatches(i + 1, 'true')) ||
+                    argvMatches(i, '--scaredycat');
         },
         execute: function (i) {
             options.scaredyCat = true;
@@ -122,8 +123,9 @@ function ArgHandlers () {
     // Run the tests in each directory, in parallel
     self.handlers.push({
         matches: function (i) {
-            return argvMatches(i, '-parallel') &&
-                argvMatches(i + 1, 'true');
+            return (argvMatches(i, '-parallel') &&
+                    argvMatches(i + 1, 'true')) ||
+                    argvMatches(i, '--parallel');
         },
         execute: function (i) {
             options.parallel = true;

@@ -38,10 +38,10 @@ mvn-nyan -f ./common,./my-project
 ```
 
 ##### Running Directories in Parallel
-If you want to run multiple directories at once, use the `-parallel` switch.
+If you want to run multiple directories at once, use the `--parallel` switch.
 
 ```
-mvn-nyan -f ./common,./my-project -scaredyCat true -parallel true
+mvn-nyan -f ./common,./my-project --scaredycat --parallel
 ```
 
 #### Running a single test
@@ -75,10 +75,10 @@ mvn-nyan -l ERROR,"Total time"
 ```
 
 #### Suppressing the Nyan Cat
-If you're running this on CI, or in a background process, the nyan cat doesn't delight so much. You can turn it off with the `-scaredyCat` switch.
+If you're running this on CI, or in a background process, the nyan cat doesn't delight so much. You can turn it off with the `--scaredycat` switch.
 
 ```Shell
-mvn-nyan -scaredyCat true
+mvn-nyan --scaredycat
 ```
 
 #### Fonts

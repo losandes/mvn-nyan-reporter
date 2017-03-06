@@ -80,8 +80,10 @@ function Printers (clc, rainbowifier, writerFactory, fonts, options) {
             write(clc.cyan('(' + timeElapsed + ')'));
         }
 
-        write(clc.right(inc));
-        write('<<< ' + heading);
+        if (options.parallel) {
+            write(clc.right(inc));
+            write('<<< ' + heading);            
+        }
 
         write('\n');
         write('\n');
