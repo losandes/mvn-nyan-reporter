@@ -32,7 +32,7 @@ function Reporter (
             onFirstPass();
         }
 
-        inResults = inResults || str.indexOf('Results') > -1;
+        inResults = inResults || str.indexOf('Results :') === 0;
 
         if (str.indexOf('Scanning for projects...') > -1) {
             // This is the start of new tests, maybe there are
@@ -80,7 +80,7 @@ function Reporter (
     command.on('close', function(code) {
         draw();
 
-        if (!options.scaredycat) {    
+        if (!options.scaredycat) {
             drawUtil.fillWithNewlines();
         }
 

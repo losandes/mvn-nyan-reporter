@@ -85,7 +85,21 @@ function ArgHandlers () {
 
                 options.showLogs = true;
             }
+        }
+    });
 
+    // Print logs after running, with optional filtering
+    // -l true (prints all logs)
+    // -l DEBUG (print all logs that have the word DEBUG in them)
+    // -logs true (prints all logs)
+    // -logs DEBUG (print all logs that have the word DEBUG in them)
+    self.handlers.push({
+        matches: function (i) {
+            return argvMatches(i, '--logs');
+        },
+        execute: function (i) {
+            options.logMatchers.push('*ALL*');
+            options.showLogs = true;
         }
     });
 
