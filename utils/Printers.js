@@ -109,7 +109,22 @@ function Printers (clc, rainbowifier, writerFactory, fonts, options) {
         write('\n');
 
         logs.forEach(function (msg) {
-            write(msg);
+            var ln;
+
+            if (msg.indexOf('WARNING') > -1) {
+                ln = msg.replace('COMPILATION WARNING :', clc.yellow('COMPILATION WARNING') + ' :')
+                        .replace(/WARNING/g, clc.yellow('WARNING'));
+            } else {
+                ln = msg.replace(/WARN/g, clc.yellow('WARN'));
+            }
+
+            write(ln
+                .replace(/DEBUG/g, clc.green('DEBUG'))
+                .replace(/INFO/g, clc.cyan('INFO'))
+                .replace('COMPILATION ERROR :', clc.red('COMPILATION ERROR') + ' :')
+                .replace(/BUILD FAILURE/g, clc.red('BUILD FAILURE'))
+                .replace(/ERROR/g, clc.red('ERROR'))
+            );
         });
 
         write('\n');

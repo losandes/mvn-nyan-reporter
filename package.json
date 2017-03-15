@@ -1,6 +1,6 @@
 {
   "name": "mvn-nyan-reporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A nyan cat reporter for mvn test",
   "main": "index.js",
   "scripts": {
