@@ -65,7 +65,7 @@ To print the logs, after the tests complete, use the `-logs` or `-l` switches.
 
 ```Shell
 # print all logs
-mvn-nyan -l true
+mvn-nyan --logs
 
 # print logs where the word DEBUG exists
 mvn-nyan -l DEBUG
